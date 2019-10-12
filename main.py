@@ -32,7 +32,38 @@ def system():
                   "system": platform.system(),
                   "version": platform.version(),}
     return jsonify(systeminfo)
+# Get all media information using media_id it is the numbered code of the specific photo resource
+# eg: '12192732' is media id  from “ https://www.pond5.com/photo/12192732/night-city-skyline-and-moon.html ”.
+@main.route("/mediainfo/<media_id>", methods=["GET"])
+def media(media_id):
+    page = requests.get("https://www.pond5.com/photo/" + str(media_id))
+    print(page.status_code)
+    soup = BeautifulSoup(page.text, "html.parser")
+    filename = soup.find("meta", property="og:image")
+    filename = filename["content"]
+    height = soup.find("meta", property="og:image:height")
+    height = height["content"]
+    regex = re.compile('(\D)+')
+    price = soup.find(id="itemDetail-totalPrice").text.strip()
+    price = regex.sub('', price)
+    size = soup.find_all("dd")[12].text
+    title = soup.find("meta", property="twitter:title")
+    title = title["content"]
+    width = soup.find("meta", property="og:image:width")
+    width = width["content"]
+    # dim = soup.find("{} x {}".format(height, width))
 
+    # all media information
+    imageinfo = {
+        "filename": filename,
+        "height": height,
+        "price": price,
+        "size": size,
+        "title": title,
+        "width": width,
+       # "dim": dim,
+    }
+    return jsonify(imageinfo)
 
 if __name__ == "__main__":
       # http://127.0.0.1

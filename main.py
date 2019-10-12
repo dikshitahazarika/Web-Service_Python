@@ -14,7 +14,7 @@ def test():
         <P><center><em>GET /SYSTEM - REQUEST RETURNS A SYSTEM INFORMATION AND SERVICE VERSION.</em></center></P>\
         <P><center><em>GET /MEDIAINFO/ID - REQUEST RETURNS TITLE, FILENAME, SIZE, DIMENSIONS AND PRICE.</em></center></P>"
     return html
-    
+
 # if we request Ping  then return "PONG", else  return "ERROR!!PLEASE TRY WITH PING".
 @main.route("/<request>", methods=["GET"])
 def ping(request):
@@ -22,6 +22,16 @@ def ping(request):
         return "Pong"
     else:
         return "ERROR!! PLEASE TRY WITH PING"
+
+# platform import provided show all the information system & return JSON format.
+@main.route("/system")
+def system():
+    systeminfo = {"architecture": platform.architecture(),
+                  "processor": platform.processor(),
+                  # "S_version": "0.0.1",
+                  "system": platform.system(),
+                  "version": platform.version(),}
+    return jsonify(systeminfo)
 
 
 if __name__ == "__main__":

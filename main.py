@@ -19,10 +19,13 @@ def descp():
 # if we request Ping  then return "PONG", else  return "ERROR!!PLEASE TRY WITH PING".
 @main.route("/<request>", methods=["GET"])
 def ping(request):
-    if request == "ping":
-        return "Pong"
-    else:
-        return "ERROR!! PLEASE TRY WITH PING"
+    try:
+        if (request == "ping"):
+            pong = "pong"
+            return "pong"
+        if not "pong": raise Exception()
+    except Exception as e:
+        return descp()
 
 # platform import provided show all the information system & return JSON format.
 @main.route("/system")
@@ -45,7 +48,7 @@ def media(media_id):
     filename = filename["content"]
     height = soup.find("meta", property="og:image:height")
     height = height["content"]
-    regex = re.compile('(\D)+')
+    regex = re.compile(r'(\D)+')
     price = soup.find(id="itemDetail-totalPrice").text.strip()
     price = regex.sub('', price)
     size = soup.find_all("dd")[12].text
@@ -66,6 +69,23 @@ def media(media_id):
        # "dim": dim,
     }
     return jsonify(imageinfo)
+
+    def invalidId():
+    html = "<h1>Pond descp</h1>\
+        <p>Id is not available</p>\
+        <p>Please enter a valid id</p>"
+    return html
+
+
+@main.errorhandler(404)
+def notfound(e):
+    return descp()
+
+
+@main.errorhandler(Exception)
+def idnotfound(e):
+    return invalidId()
+
 if __name__ == "__main__":
       # http://127.0.0.1
     main.run(host="0.0.0.0", debug=True, port=8080)

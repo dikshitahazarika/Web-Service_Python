@@ -70,7 +70,8 @@ def media(media_id):
     }
     return jsonify(imageinfo)
 
-    def invalidId():
+
+def invalidId():
     html = "<h1>Pond descp</h1>\
         <p>Id is not available</p>\
         <p>Please enter a valid id</p>"
@@ -85,6 +86,7 @@ def notfound(e):
 @main.errorhandler(Exception)
 def idnotfound(e):
     return invalidId()
+
 
 if __name__ == "__main__":
       # http://127.0.0.1

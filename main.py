@@ -19,14 +19,11 @@ def descp():
 # if we request Ping  then return "PONG", else  return "ERROR!!PLEASE TRY WITH PING".
 @main.route("/<request>", methods=["GET"])
 def ping(request):
-    try:
-        if (request == "ping"):
-            pong = "pong"
-            return "pong"
-        if not "pong": raise Exception()
-    except Exception as e:
-        return descp()
-
+    if request == "ping":
+        return "Pong"
+    else:
+        return "ERROR!! PLEASE TRY WITH PING"
+    
 # platform import provided show all the information system & return JSON format.
 @main.route("/system")
 def system():
@@ -76,12 +73,6 @@ def invalidId():
         <p>Id is not available</p>\
         <p>Please enter a valid id</p>"
     return html
-
-
-@main.errorhandler(404)
-def notfound(e):
-    return descp()
-
 
 @main.errorhandler(Exception)
 def idnotfound(e):

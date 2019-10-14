@@ -30,12 +30,12 @@
 
 
 1.postman/System Image(When we enter System request should return JSON object with service version and system information)<br/>
-![](/postman/invalid media.png)&nbsp;
+![](/postman/invalid media.png)<br/>
 2.postman/ping Image (When we enter Ping request should return “pong”)<br/>
-![](/postman/invalid ping.png)&nbsp;&nbsp;
+![](/postman/invalid ping.png)<br/>
 3.postman/ping_error Image(When we do not enter Ping request eg:http://0.0.0.0:8080/service)<br/>
-![](/postman/invalid ping_error.png)&nbsp;
+![](/postman/invalid ping_error.png)<br/>
 4.postman/media_info Image(When we enter valid media ID which associated with   pond5 website media id)<br/>
-![](/postman/media_info.png)&nbsp;&nbsp;
+![](/postman/media_info.png)<br/>
 5.postman/Invalid Image(When we enter invalid media ID)<br/>
-![](/postman/system.png)&nbsp;
+![](/postman/system.png)<br/>
